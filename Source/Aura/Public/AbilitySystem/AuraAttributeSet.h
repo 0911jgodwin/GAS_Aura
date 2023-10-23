@@ -80,6 +80,41 @@ public:
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Vigour, Category = "Primary Attributes")
 	FGameplayAttributeData Vigour;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Vigour);
+
+	/*
+	 *Derived Attributes
+	 */
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Armour, Category = "Derived Attributes")
+	FGameplayAttributeData Armour;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Armour);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ArmourPenetration, Category = "Derived Attributes")
+	FGameplayAttributeData ArmourPenetration;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, ArmourPenetration);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_BlockChance, Category = "Derived Attributes")
+	FGameplayAttributeData BlockChance;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, BlockChance);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitChance, Category = "Derived Attributes")
+	FGameplayAttributeData CriticalHitChance;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CriticalHitChance);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitMagnitude, Category = "Derived Attributes")
+	FGameplayAttributeData CriticalHitMagnitude;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CriticalHitMagnitude);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalDefence, Category = "Derived Attributes")
+	FGameplayAttributeData CriticalDefence;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CriticalDefence);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HealthRegeneration, Category = "Derived Attributes")
+	FGameplayAttributeData HealthRegeneration;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, HealthRegeneration);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ManaRegeneration, Category = "Derived Attributes")
+	FGameplayAttributeData ManaRegeneration;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, ManaRegeneration);
 	
 	/*
 	 *Vital Attributes
@@ -124,6 +159,30 @@ public:
 	
 	UFUNCTION()
 	void OnRep_Vigour(const FGameplayAttributeData& OldVigour) const;
+	
+	UFUNCTION()
+	void OnRep_Armour(const FGameplayAttributeData& OldArmour) const;
+
+	UFUNCTION()
+	void OnRep_ArmourPenetration(const FGameplayAttributeData& OldArmourPenetration) const;
+
+	UFUNCTION()
+	void OnRep_BlockChance(const FGameplayAttributeData& OldBlockChance) const;
+	
+	UFUNCTION()
+	void OnRep_CriticalHitChance(const FGameplayAttributeData& OldCriticalHitChance) const;
+
+	UFUNCTION()
+	void OnRep_CriticalHitMagnitude(const FGameplayAttributeData& OldCriticalHitMagnitude) const;
+	
+	UFUNCTION()
+	void OnRep_CriticalDefence(const FGameplayAttributeData& OldCriticalDefence) const;
+
+	UFUNCTION()
+	void OnRep_HealthRegeneration(const FGameplayAttributeData& OldHealthRegeneration) const;
+	
+	UFUNCTION()
+	void OnRep_ManaRegeneration(const FGameplayAttributeData& OldManaRegeneration) const;
 
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
