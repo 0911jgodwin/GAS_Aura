@@ -53,7 +53,7 @@ void FAuraGameplayTags::InitialiseNativeGameplayTags()
 	
 	GameplayTags.Attributes_Derived_CriticalHitChance = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Attributes.Derived.CriticalHitChance"),
-		FString("RChance to double damage plus critical hit bonus")
+		FString("Chance to double damage plus critical hit bonus")
 		);
 
 	GameplayTags.Attributes_Derived_CriticalHitMagnitude = UGameplayTagsManager::Get().AddNativeGameplayTag(
