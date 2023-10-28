@@ -13,11 +13,23 @@ UAuraAttributeSet::UAuraAttributeSet()
 {
 	const FAuraGameplayTags& GameplayTags = FAuraGameplayTags::Get();
 
-	
+	/* Primary Attributes */
 	TagsToAttributes.Add(GameplayTags.Attributes_Primary_Strength, GetStrengthAttribute);
 	TagsToAttributes.Add(GameplayTags.Attributes_Primary_Intelligence, GetIntelligenceAttribute);
 	TagsToAttributes.Add(GameplayTags.Attributes_Primary_Resilience, GetResilienceAttribute);
 	TagsToAttributes.Add(GameplayTags.Attributes_Primary_Vigour, GetVigourAttribute);
+	
+	/* Derived Attributes */
+	TagsToAttributes.Add(GameplayTags.Attributes_Derived_Armour, GetArmourAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Derived_ArmourPenetration, GetArmourPenetrationAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Derived_BlockChance, GetBlockChanceAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Derived_CriticalHitChance, GetCriticalHitChanceAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Derived_CriticalHitMagnitude, GetCriticalHitMagnitudeAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Derived_CriticalDefence, GetCriticalDefenceAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Derived_HealthRegeneration, GetHealthRegenerationAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Derived_ManaRegeneration, GetManaRegenerationAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Derived_MaxHealth, GetMaxHealthAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Derived_MaxMana, GetMaxManaAttribute);
 	
 }
 
