@@ -8,7 +8,7 @@
 
 class UGameplayEffect;
 class UGameplayAbility;
-//very ill, this is a cheat day
+
 UENUM(BlueprintType)
 enum class ECharacterClass : uint8
 {
