@@ -14,12 +14,18 @@ struct AuraDamageStatics
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Armour);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(ArmourPenetration);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(BlockChance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(CriticalHitChance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(CriticalDefence);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(CriticalHitMagnitude);
 
 	AuraDamageStatics()
 	{
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, Armour, Target, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, ArmourPenetration, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, BlockChance, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, CriticalHitChance, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, CriticalDefence, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UAuraAttributeSet, CriticalHitMagnitude, Source, false);		
 	}
 };
 
@@ -84,6 +90,28 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	const float EffectiveArmourCoefficient = EffectiveArmourCurve->Eval(TargetCombatInterface->GetPlayerLevel());
 	// Armour ignores a percentage of incoming Damage.
 	Damage *= ( 100 - EffectiveArmour * EffectiveArmourCoefficient ) / 100.f;
+
+	float SourceCriticalHitChance = 0.f;
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().CriticalHitChanceDef, EvaluationParameters, SourceCriticalHitChance);
+	SourceCriticalHitChance = FMath::Max<float>(SourceCriticalHitChance, 0.f);
+
+	float TargetCriticalDefence = 0.f;
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().CriticalDefenceDef, EvaluationParameters, TargetCriticalDefence);
+	TargetCriticalDefence = FMath::Max<float>(TargetCriticalDefence, 0.f);
+
+	float SourceCriticalHitMagnitude = 0.f;
+	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(DamageStatics().CriticalHitMagnitudeDef, EvaluationParameters, SourceCriticalHitMagnitude);
+	SourceCriticalHitMagnitude = FMath::Max<float>(SourceCriticalHitMagnitude, 0.f);
+
+	const FRealCurve* CriticalDefenceCurve = CharacterClassInfo->DamageCalculationCoefficients->FindCurve(FName("CriticalDefence"), FString());
+	const float CriticalDefenceCoefficient = CriticalDefenceCurve->Eval(TargetCombatInterface->GetPlayerLevel());
+
+	// Critical Defence reduces Critical Hit Chance by a certain percentage
+	const float EffectiveCriticalHitChance = SourceCriticalHitChance - TargetCriticalDefence * CriticalDefenceCoefficient;
+	const bool bCriticalHit = FMath::RandRange(1, 100) < EffectiveCriticalHitChance;
+
+	// Double damage plus a bonus if critical hit
+	Damage = bCriticalHit ? 2.f * Damage + SourceCriticalHitMagnitude : Damage;
 
 	const FGameplayModifierEvaluatedData EvaluatedData(UAuraAttributeSet::GetIncomingDamageAttribute(), EGameplayModOp::Additive, Damage);
 	OutExecutionOutput.AddOutputModifier(EvaluatedData);
