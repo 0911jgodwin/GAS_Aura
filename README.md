@@ -14,7 +14,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/0911jgodwin/GAS_Aura">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="Images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">GAS_Aura</h3>
@@ -89,7 +89,7 @@ Project Link: [https://github.com/0911jgodwin/GAS_Aura](https://github.com/0911j
 [license-url]: https://github.com/0911jgodwin/GAS_Aura/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/joe-godwin-5274ab168
-[aura-gameplay]: images/AuraGameplay.gif
+[aura-gameplay]: Images/AuraGameplay.gif
 [Unreal.com]: https://img.shields.io/badge/Unreal_%20Engine-000000?style=for-the-badge&logo=unrealengine&logoColor=white
 [Unreal-url]: https://www.unrealengine.com/
 [JetBrains.com]: https://img.shields.io/badge/JetBrains-000000?style=for-the-badge&logo=jetbrains&logoColor=white
