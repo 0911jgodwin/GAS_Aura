@@ -2,7 +2,6 @@
 
 
 #include "AbilitySystem/Passive/PassiveNiagaraComponent.h"
-
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "Interaction/CombatInterface.h"
